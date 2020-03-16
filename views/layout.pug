@@ -1,0 +1,99 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/vendor/fontawesome-free/css/all.min.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')
+    link(rel='stylesheet', href='/vendor/datatables/dataTables.bootstrap4.min.css')    
+    link(rel='stylesheet'  href="/vendor/select2/4.0.6-rc.0/css/select2.min.css")
+    link(rel='stylesheet', href='/stylesheets/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css')    
+    link(rel='stylesheet', href='/stylesheets/sb-admin-2.min.css')
+
+    // Bootstrap core JavaScript
+    script(src="/vendor/jquery/jquery.min.js")
+    script(src="vendor/bootstrap/js/bootstrap.bundle.min.js")
+
+    // Core plugin JavaScript
+    script(src="/vendor/jquery-easing/jquery.easing.min.js")
+
+    // Custom scripts for all pages
+    script(src="/vendor/chart.js/Chart.min.js")
+    script(src='/vendor/datatables/jquery.dataTables.min.js')
+    script(src='/vendor/datatables/dataTables.bootstrap4.min.js')
+
+    script(src="/vendor/select2/4.0.6-rc.0/js/select2.min.js")
+    script(src="/vendor/lodash/4.15.0/lodash.min.js")
+    script(src="/vendor/moment.js/2.24.0/moment.min.js")
+
+    // Page level custom scripts
+    script(src="/javascripts/project.js")
+
+  body#page-top
+    div#wrapper
+      // Begin side bar
+      ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion
+        a.sidebar-brand.d-flex.align-items-center.justify-content-center(href="/")
+          div.sidebar-brand-icon.rotate-n-15            
+            i.fas.fa-mobile
+          div.sidebar-brand-text.mx-2 JIHAMI Study SMS system
+        hr.sidebar-divider.my-21
+        span.sidebar-brand.d-flex.align-items-center.justify-content-center
+          img.img-rounded(src="/images/logo.png", style='width:100%')
+        hr.sidebar-divider.my-2
+
+        li.nav-item.active
+          a.nav-link(href='/')
+            i.fas.fa-fw.fa-users
+            span Study participants
+        li.nav-item
+          a.nav-link(href='/sms')
+            i.fas.fa-fw.fa-paper-plane
+            span Send SMS
+        li.nav-item
+          a.nav-link(href='/sms_log')
+            i.fas.fa-fw.fa-history
+            span SMS Logs
+        li.nav-item
+          a.nav-link(href='/')
+            i.fas.fa-fw.fa-envelope
+            span Message Templates
+      // End side bar
+      div#content-wrapper.d-flex.flex-column
+        div#content
+          // Topbar
+          nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
+            // Sidebar Toggle (Topbar)
+            button#sidebarToggleTop.btn.btn-link.d-md-none.rounded-circle.mr-3
+              i.fa.fa-bars
+            // Topbar Navbar
+            ul.navbar-nav.ml-auto
+              div.topbar-divider.d-none.d-sm-block
+              // Nav Item - User Information
+              li.nav-item.dropdown.no-arrow
+                a#userDropdown.nav-link.dropdown-toggle(role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+                  span.mr-2.d-none.d-lg-inline.text-gray-600.small
+                  img.img-profile.rounded-circle(src="/images/logo.png")
+                // Dropdown - User Information
+                div.dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby="userDropdown")
+                  a.dropdown-item(href="#")
+                    i.fa.fa-user.fa-sm.fa-fw.mr-2.text-gray-400
+                    | Profile
+                  a.dropdown-item(href="#")
+                    i.fas.fa-cogs.fa-sm.fa-fw.mr-2.text-gray-400
+                    | Settings
+                  a.dropdown-item(href="#")
+                    i.fas.fa-list.fa-sm.fa-fw.mr-2.text-gray-400
+                    | Activity Log
+                  div.dropdown-divider
+                  a.dropdown-item(href="#" data-toggle="modal" data-target="#logoutModal")
+                    i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
+                    | Logout
+          div.container-fluid
+            block content 
+
+        block foot
+          footer.sticky-footer.bg-white
+            div.container.my-auto
+              div.copyright.text-center.my-auto
+                span &copy; JIHAMI Study (2020)

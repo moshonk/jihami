@@ -1,0 +1,94 @@
+extends layout
+
+block content
+  h2(class='card-title') 
+
+  div.row
+    div.col-md-4
+      div.bg-dark.text-light(class='card card-body bump-down')
+        fieldset.form-group.field-set
+            legend.legend Study participant details
+            div.row
+              div.form-group.col-md-12
+                input.form-control.form-control-sm(type="hidden",name='study_subject_id', id='study_subject_id', value=study_subject.study_subject_id)
+                label(for='study_id') Study Id:
+                strong=study_subject.study_id
+              div.form-group.col-md-12
+                label(for='subject_name') Name: 
+                    span=study_subject.subject_name
+              div.form-group.col-md-12
+                label.control-label(for='gender') Gender: 
+                    span=study_subject.gender
+              div.form-group.col-md-12
+                label(for='enrollment_date') Enrollment Date: 
+                    span=study_subject.enrollment_date
+              div.form-group.col-md-12
+                label(for="telephone_contact") Phone contact: 
+                    span=study_subject.telephone_contact
+              div.form-group.col-md-12
+                label(for="date_of_birth") Date of birth: 
+                    span=study_subject.date_of_birth
+              div.form-group.col-md-12
+                label(for="study_welcome_message") Welcome message sent: 
+                    span=study_subject.study_welcome_message==1?'Y':'N'
+              div.form-group.col-md-12
+                label(for="study_completion_message") Study completion message sent: 
+                    span=study_subject.study_completion_message==1?'Y':'N'
+              div.form-group.col-md-12
+                label(for="date_of_birth") Date of birth: 
+                    span=study_subject.date_of_birth
+              div.form-group.col-md-12
+                label.control-label(for='active') Active: 
+                    span=study_subject.active==1?'Y':'N'
+    div.col-md-4
+      div.bg-light.text-dark(class='card card-body bump-down')
+        fieldset.form-group.field-set
+            legend.legend Message Schedules
+            div.row
+                table#visit-logs.table.table-primary.table-bordered.table-striped.table-hover
+                  thead
+                    tr
+                      th Message
+                      th Scheduled date
+                      th Status
+                  tbody
+                    each message_schedule in study_subject.message_schedules
+                      tr
+                        td 
+                          span #{message_schedule.message.text_en} 
+                          strong (#{message_schedule.message.intent})
+                        td #{message_schedule.scheduled_date}
+                        td #{message_schedule.message_status==1?'Sent':'Not sent'}
+    div.col-md-4
+      div.bg-light.text-dark(class='card card-body bump-down')
+        fieldset.form-group.field-set
+            legend.legend Visits Logs
+            div.row
+              div.col-md-12
+                
+            div.row
+              div.col-md-12
+                table#visit-logs.table.table-warning.table-bordered.table-striped.table-hover
+                  thead
+                    tr
+                      th Visit date
+                      th Next appointment date
+                      th 
+                        a.btn.btn-primary(href='#') Log visit
+                  tbody
+                    each visit in study_subject.visits
+                      tr
+                        td #{visit.visit_date}
+                        td #{visit.appointment_date}
+                        td #{visit.visit_id}
+  div.row
+    div.form-group.col-md-12
+      span#spinner(style='display:none')
+        span.btn.btn-warning
+          span.spinner-grow.spinner-grow-sm 
+          | Please wait...
+
+  div.row
+    div.col-md-12    
+      div#message
+        div.alert.alert-warning

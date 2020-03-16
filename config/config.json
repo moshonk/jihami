@@ -1,0 +1,41 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root",
+    "database": "jihami_study",
+    "host": "127.0.0.1",
+    "port": "3308",
+    "dialect": "mysql",
+    "timezone": "Africa/Nairobi",
+    "dialectOptions": {
+      "useUTC": false
+    },
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "root",
+    "password": "root",
+    "database": "jihami_study",
+    "host": "127.0.0.1:3308",
+    "port": "3308",
+    "dialect": "mysql",
+    "timezone": "Africa/Nairobi",
+    "dialectOptions": {
+      "useUTC": false
+    },
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "root",
+    "password": "root",
+    "database": "jihami_study",
+    "host": "127.0.0.1:3308",
+    "port": "3308",
+    "dialect": "mysql",
+    "timezone": "Africa/Nairobi",
+    "dialectOptions": {
+      "useUTC": false
+    },
+    "operatorsAliases": false
+  }
+}

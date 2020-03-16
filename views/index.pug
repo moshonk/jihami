@@ -1,0 +1,81 @@
+extends layout
+
+block content
+  h2(class='card-title') Study participants
+
+
+  form(method='GET', action='')#participant-form
+    div.bg-light.text-dark(class='card card-body bump-down')
+      fieldset.form-group.field-set
+          legend.legend Add study participant
+          div.row
+            div.form-group.col-md-6
+              label(for='study_id') Study Id: 
+              input.form-control.form-control-sm(name='study_id', id='study_id', required='true')
+            div.form-group.col-md-12
+              label(for='subject_name') Name: 
+              input.form-control.form-control-sm(name='subject_name', id='subject_name', required='true')
+            div.form-group.col-md-6
+              label.control-label(for='gender') Gender: 
+              div.custom-control.custom-radio
+                label(for='gender-male') Male
+                  input.custom-radio(type='radio',name='gender', id='gender-male', value='M')
+                label(for='gender-female') Female
+                  input.custom-radio(type='radio',name='gender', id='gender-female', value='F')
+            div.form-group.col-md-6
+              label(for='enrollment_date') Enrollment Date: 
+              input.form-control.form-control-sm(type='date', name='enrollment_date', id='enrollment_date',value='')
+            div.form-group.col-md-6
+              label(for="telephone_contact") Phone contact: 
+              input.form-control.form-control-sm(type='text', name='telephone_contact', id='telephone_contact',value='', max=10, min=10)
+            div.form-group.col-md-6
+              label(for="date_of_birth") Date of birth: 
+              input.form-control.form-control-sm(type='date', name='date_of_birth', id='date_of_birth',value='')
+            div.form-group.col-md-6
+              label.control-label(for='active') Active: 
+              div.custom-control.custom-radio
+                label(for='active-y') Yes
+                  input.custom-radio(type='radio',name='active', id='active-y', value='1', checked=true)
+                label(for='active-n') No
+                  input.custom-radio(type='radio',name='active', id='active-n', value='0')
+          div.row
+            div.form-group.col-md-12
+              input#save-participant.input.btn.btn-primary(type="button", name="save-participant", value="Save")
+              span#spinner(style='display:none')
+                span.btn.btn-warning
+                  span.spinner-grow.spinner-grow-sm 
+                  | Please wait...
+
+  div.row
+    div.col-md-12    
+      div#message
+        div.alert.alert-warning
+  hr.my-1
+  div.row
+    div.col-md-12
+      table#study_subjects_table.table.table-secondary.table-bordered.table-striped.table-hover
+        thead
+          tr
+            th Study Id
+            th Name
+            th DOB
+            th Gender
+            th Enrollment date
+            th Contact
+            th Active
+            th Action
+        tbody
+          each subject in study_subjects
+            tr(class={inactive: subject.active===0})
+              td #{subject.study_id}
+              td #{subject.subject_name}
+              td #{subject.date_of_birth}
+              td #{subject.gender}
+              td #{subject.enrollment_date}
+              td #{subject.telephone_contact}
+              td #{subject.active==1?'Y':'N'}
+              td 
+                a(href='/view/'+ subject.study_subject_id) View | 
+                a(href='/'+ subject.study_subject_id) Edit | 
+                a(href='#') Visit 
+                

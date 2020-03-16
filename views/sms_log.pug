@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  h2(class='card-title') SMS Logs
+
+  div.row
+    div.form-group.col-md-12
+      span#spinner(style='display:none')
+        span.btn.btn-warning
+          span.spinner-grow.spinner-grow-sm 
+          | Please wait...
+
+  div.row
+    div.col-md-12    
+      div#message
+        div.alert.alert-warning
+  hr.my-1
+  div.row
+    div.col-md-12
+      table#study_subjects_table.table.table-secondary.table-bordered.table-striped.table-hover
+        thead
+          tr
+            th Participant
+            th Message
+            th Contact
+            th Date
+            th Sent
+            th Action
+        tbody
+          each sms_log in sms_logs
+            tr(class={inactive: sms_log.send_status===1})
+              td #{sms_log.study_subject.subject_name}
+              td #{sms_log.sms_text}
+              td #{sms_log.contact_sent_to}
+              td #{sms_log.date_sent}
+              td #{sms_log.send_status==1?'Y':'N'}
+              td 
+                if sms_log.send_status == 0
+                  a(href='/sms/resend/'+ sms_log.sms_log_id) Resend
+        

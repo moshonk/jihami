@@ -1,0 +1,67 @@
+extends layout
+
+block content
+  h2(class='card-title') Send SMS
+
+  form(method='GET', action='/sms')#participant-form
+    div.bg-light.text-dark(class='card card-body bump-down')
+      fieldset.form-group.field-set
+          legend.legend Criteria
+          div.row
+            div.form-group.col-md-6
+              label(for='message_type') SMS Type: 
+              select.form-control.form-control-sm(name='message_type', id='message_type')
+                option(value='') Select
+                option(value='1') Study welcome
+                option(value='2') Adherence support
+                option(value='3') Visit reminder
+                option(value='4') Missed visit follow up
+                option(value='5') Study completion
+            div.form-group.col-md-6
+              label(for='scheduled_date') Date: 
+              input.form-control.form-control-sm(type='date', name='scheduled_date', id='scheduled_date',value='')
+          div.row
+            div.form-group.col-md-12
+              input#search-schedule.input.btn.btn-primary(type="button", name="search-schedule", value="Search")
+              span#spinner(style='display:none')
+                span.btn.btn-warning
+                  span.spinner-grow.spinner-grow-sm 
+                  | Please wait...
+
+  div.row
+    div.col-md-12    
+      div#message
+        div.alert.alert-warning
+
+  div.row
+      div.col-md-12
+        table#message-schedules.table.table-secondary.table-bordered.table-striped.table-hover
+          thead
+            tr
+              th(style={width:'50px'}) Select
+              th Participant Name
+              th Message (English)
+              th Message (Luo)
+          tbody
+            each message_schedule in message_schedules
+              tr
+                td 
+                  input.input(type="checkbox")
+                td #{message_schedule.message_schedule_id}
+                td #{message_schedule.message_schedule_id}
+                td #{message_schedule.message_schedule_id}
+  div.row
+    div.col-md-4
+      input#comm-port.form-control(type="textbox", name="comm-port", value="COM14", style="display:block")
+      select.form-control.form-control-sm(name='message_type', id='comm-port1', style="display:none")
+        option(value='') Select
+        each port in ports_list
+          option(value=port.comName) #{port.manufacturer} (#{port.comName})
+
+    div.col-md-4
+      span#modem-status.badge.badge-sm.badge-danger(style="display:block") Disconnected
+    div.col-md-4
+      input#check-modem.input.btn.btn-primary(type="button", name="check-modem", value="Check modem status", style="display:block")
+  div.row
+    div.col-md-12
+      input#send-sms.input.btn.btn-primary(type="button", name="send-sms", value="Send selected messages", style="display:block")
